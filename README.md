@@ -1,1 +1,1 @@
-This file serves as an introduction to your Knowledge Base, it is displayed on the homepage of your website. Use it to provide more context to your visitors.
+朱阳星的私人知识库,记录遇到的问题及解决办法便于帮助自己及他人

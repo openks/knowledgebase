@@ -136,9 +136,9 @@ yarn add vue-property-decorator
 ```
 # 总结
 
-我在尝试过程中发现两个坑爹问题
-1.项目起动起来后chrome浏览器无法访问 （纸飞机）
-2.第二阶段所有设置好后发现页面报错 （不认真）
+我在尝试过程中发现两个坑爹问题  
+1.项目起动起来后chrome浏览器无法访问 （纸飞机）  
+2.第二阶段所有设置好后发现页面报错 （不认真）  
 ```
 [Vue warn]: Property or method "msg" is not defined on the instance but referenced during render. Make sure to declare reactive data properties in the data option.
 
@@ -148,11 +148,11 @@ found in
        <App> at src/App.vue
          <Root>
 ```
-对于问题1:
+对于问题1:  
 发现竟然跟***纸飞机***有关。。纸飞机 。。之前一直都是好的，在chrome自动升级后就不行了无法打开，
 在我用mac访问局域网无法访问的时候才发觉跟网络有关把纸飞机一关，局域网和项目竟然都能正常了
 
-对于问题2:
+对于问题2:  
 一直找不到原因，明明都对啊，为什么显示不正常,看提示信息很明显没有声明就在template里使用.  
 我的代码如下
 ```html
@@ -186,7 +186,7 @@ class Hello extends Vue {
 export default Hello;
 </script>
 ```
-设置我都把`ts`去了只用`vue-class-component`对比了N久搞到要回家了硬是没找到答案。。。
+甚至我都把`ts`都去了只用`vue-class-component`对比了N久搞到要回家了硬是没找到答案。。。
 回家还在纳闷为毛不正常，为什么第二天一早很容易就发现问题了 
 ```  
 msg: 'msg';//不是用冒号 应该用等号。。 这么简单昨天竟然一直没看出来
