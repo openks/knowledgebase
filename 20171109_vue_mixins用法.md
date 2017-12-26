@@ -69,3 +69,52 @@ Vue.mixin({
     ...mixin
 })
 ```
+
+有几个页面都需要任务状态,该状态是一个对象数组。
+根据需求每个用户获取的状态都是相同的，多处需要只去一处即可。
+注意：全局mixin的data在每个组件上都会有的，但是要改变这个值能改的只能是自己组件的值。其父组件和子组件均为默认值
+```js
+// src/utils/mixin.js
+let mixin = {
+    data () {
+        return {
+            mixinTaskStatus: [],
+            mixinUploadUrl: process.env.NODE_ENV === 'development' ? 'aaa/fileUpload' : 'bbb/fileUpload'
+        }
+    },
+    methods: {
+        mixinFetchState () {
+          let data={}
+          ......
+          // 判断本地存储(localStorage或sessionStorage)是否存在，
+          // 如果存在则赋值
+          // 如果不存在从服务端获取数据并赋值及存储在本地
+            this.mixinTaskStatus = data
+        }
+}
+export default mixin
+```
+```js 
+// src/main.js
+// 启用全局mixn
+import Vue from 'vue'
+import mixin from '@/utils/mixin.js'
+// 启用全局mixin
+Vue.mixin({
+    ...mixin
+})
+```
+具体使用：
+比如我在batchSendTask页面需要使用该参数，就在该页面的mounted函数里调用该方法
+```js
+mounted () {
+    this.mixinFetchState()
+}
+```
+在页面中就可以直接只用这个值了
+```vue
+<el-option :label="item.code"
+           v-for="item in mixinTaskStatus"
+           :key="item.id"
+           :value="item.name"></el-option>
+```
