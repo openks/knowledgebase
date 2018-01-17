@@ -118,3 +118,36 @@ mounted () {
            :key="item.id"
            :value="item.name"></el-option>
 ```
+-----------------
+add in 2018-01-12 17:12:00
+如果二级代码类型比较多，你就需要在全局mixin里添加多个data和多个method,
+这么一个一个的写就不明智了，把相关字段做参数，只用一个method岂不更好
+```
+// src/utils/mixin.js
+let mixin = {
+    data () {
+        return {
+            mixinStaticCode: {},//把所有二级代码都作为对象的属性
+            mixinUploadUrl: process.env.NODE_ENV === 'development' ? 'aaa/fileUpload' : 'bbb/fileUpload'
+        }
+    },
+    methods: {
+        mixinFetchStaticCode (storageName,featchUrl/featchParam,attribute) {
+          let data={}
+          ......
+          // 判断本地存储(localStorage或sessionStorage)是否存在，
+          // 如果存在data则直接赋值
+          this.mixinStaticCode[attribute]=data;
+          // 如果不存在从服务端获取数据并赋值及存储在本地
+          this.mixinTaskStatus = data
+        }
+}
+export default mixin
+```
+在页面中就可以直接只用这个值了
+```vue
+<el-option :label="item.code"
+           v-for="item in mixinStaticCode.aaaa"
+           :key="item.id"
+           :value="item.name"></el-option>
+```
