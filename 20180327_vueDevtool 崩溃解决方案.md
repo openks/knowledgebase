@@ -1,0 +1,1 @@
+关闭vuex的recording和event的recording,仅在需要的时候打开

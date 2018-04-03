@@ -1,0 +1,4 @@
+官方demo里全部只有一个label
+  ```html
+  <el-checkbox label="选中值">显示值</el-checkbox>
+  ```
